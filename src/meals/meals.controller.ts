@@ -13,6 +13,7 @@ import { CustomerMeal } from './entity.ts/customer.meal';
 import { OpenAITools } from './open-ai-tools/open-ai-tools';
 import { ApiQuery } from '@nestjs/swagger';
 import { InstructionValidation } from './dto/instructions-validation';
+import { GenerateImageBody } from './dto/generate-image.dto';
 const prisma = new PrismaClient();
 
 @Controller('customer-meals')
@@ -80,13 +81,14 @@ export class MealsController {
   }
 
   @Post('generate-image')
-  async generateMealImage(@Body('ingredients') ingredients: string) {
+  async generateMealImage(@Body() data: GenerateImageBody) {
     try {
       const AITools = new OpenAITools();
       const imageUrlPromise = AITools.generate(
         'A platting meal with these ingredients :' +
-          ingredients +
-          ' as you are a chef of CookUnity'
+          data.ingredients +
+          ' the name of the meal is :' +
+          data.name
       );
       const imageUrl = await imageUrlPromise.then();
       return imageUrl;
