@@ -39,6 +39,20 @@ export class MealsController {
   @Post()
   async createCustomerMeal(@Body() mealData: CustomerMeal) {
     try {
+      if (mealData.image.length < 10) {
+        const AITools = new OpenAITools();
+        const imageUrlPromise = AITools.generate(
+          'Generate only the platting of a real ' +
+            mealData.name +
+            'dish , that platting are cooked with the following instructions :' +
+            mealData.instructions +
+            ' and have the following ingredients :' +
+            mealData.ingredients
+        );
+        const imageUrl = await imageUrlPromise.then();
+        mealData.image = imageUrl;
+      }
+
       const newMeal = await prisma.customerMeal.create({
         data: mealData
       });
