@@ -6,4 +6,7 @@ export class GenerateImageBody {
 
   @ApiProperty()
   name: string;
+
+  @ApiProperty()
+  instructions: string;
 }
