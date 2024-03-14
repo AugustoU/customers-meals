@@ -15,6 +15,7 @@ model CustomerMeal {
   instructions    String
   ingredients     String
   image           String
+  userRate        String
   likes           Int      @default(0)
   dislikes        Int      @default(0)
 }

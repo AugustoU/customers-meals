@@ -8,6 +8,10 @@ export class CustomerMeal {
 
   @Expose()
   @ApiProperty({ type: String })
+  userRate: string;
+
+  @Expose()
+  @ApiProperty({ type: String })
   instructions: string;
 
   @Expose()
