@@ -68,7 +68,7 @@ export class MealsController {
     try {
       const deletedMeal = await prisma.customerMeal.delete({
         where: {
-          id
+          id: +id
         }
       });
       return deletedMeal;
