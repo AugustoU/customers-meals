@@ -85,12 +85,10 @@ export class MealsController {
     try {
       const AITools = new OpenAITools();
       const imageUrlPromise = AITools.generate(
-        'Generate a platting meal photo with these ingredients :' +
-          data.ingredients +
-          ' the name of the meal is :' +
-          data.name +
-          ' and those are the instructions to cook: ' +
-          data.instructions
+        'Generate the image of a real dish with the following instructions :' +
+          data.instructions +
+          ' and ingredients :' +
+          data.ingredients
       );
       const imageUrl = await imageUrlPromise.then();
       return imageUrl;
